@@ -1,5 +1,7 @@
 # AIS Membership Portal
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 The official membership portal for the Artificial Intelligence Society.
 ### Quick Start
 
