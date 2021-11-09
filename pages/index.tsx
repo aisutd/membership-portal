@@ -10,6 +10,7 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   console.log(session);
+  console.log(process.env.COGNITO_DOMAIN)
 
   return (
     <div className={styles.container}>
