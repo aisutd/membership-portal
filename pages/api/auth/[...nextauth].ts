@@ -1,5 +1,8 @@
-import NextAuth from "next-auth";
+import NextAuth, { Account, Profile, Session, User } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import Providers from "next-auth/providers";
+import { DynamoDBAdapter } from "@next-auth/dynamodb-adapter"
+import AWS from "util/aws";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -11,4 +14,28 @@ export default NextAuth({
     }),
     // ...add more providers here
   ],
+  adapter: DynamoDBAdapter(
+    new AWS.DynamoDB.DocumentClient()
+  ),
+  session: {
+    jwt: true,
+  },
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log({ signin: true, user, account, profile, email, credentials });
+      return true;
+    },
+
+    // async redirect({ url, baseUrl }) { return baseUrl },
+
+    async session(session, user) {
+      console.log({ sesh: true, session, user });
+      return session;
+    },
+
+    async jwt(token, user, account, profile, isNewUser) {
+      console.log({ jwt: true, token, user, account, profile, isNewUser });
+      return token;
+    },
+  },
 });
