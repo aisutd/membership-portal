@@ -3,35 +3,49 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
-import { signIn, signOut, useSession, getCsrfToken } from "next-auth/client";
+import { signIn, signOut, useSession } from "next-auth/client";
 import { useEffect } from "react";
+import { subject } from "recoil/state";
+import { useRecoilState } from "recoil";
+import axios from "axios";
 
 const Home: NextPage = () => {
   const [session, loading] = useSession();
   const router = useRouter();
+  const [sub, setSub] = useRecoilState(subject);
 
+  // for testing, will fetch profile information & load into recoil global state
   useEffect(() => {
-    (async () => {
-      const csrfToken = await getCsrfToken();
-      console.log(csrfToken);
-    })();
-  }, []);
+    if (session) {
+      (async () => {
+        const result = await axios.get("http://localhost:3000/api/key");
+        console.log(result.data);
+        if (result.data.status) {
+          setSub({
+            email: session.user?.email as string,
+            next_id: session.sub as string,
+            cognito_id: result.data.provider_id,
+            access_token: result.data.access_token,
+          });
+        }
+      })();
+    }
+  }, [loading, session, setSub]);
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Membership Portal V2</title>
+        <title>Membership Portal</title>
         <meta name="description" content="Join AIS Today!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to{" "}
-          <a href="https://aisutd.org">The Student Org</a>
+          Welcome to <a href="https://aisutd.org">Artificial Intelligence Society</a>
         </h1>
 
-        <p className={styles.description}>Membership Portal V2</p>
+        <p className={styles.description}>Membership Portal</p>
 
         <div className={styles.grid}>
           <a className={styles.card} onClick={() => signIn("cognito")}>
