@@ -17,31 +17,3 @@ export interface ApiFuncs<GetType> {
   PUT?: Function;
   DELETE?: Function;
 }
-
-// export interface one {
-//   data: string;
-// }
-
-// export interface two {
-//   data2: string;
-// }
-
-// export interface test<T> {
-//   field: ApiResponseData & T;
-// }
-
-// const v: test<one> = {
-//   field: {
-//     status: true,
-//     message: "string",
-//     data: "hello",
-//   },
-// };
-
-// const u: test<two> = {
-//   field: {
-//     status: true,
-//     message: "string",
-//     data2: "hello",
-//   },
-// };
