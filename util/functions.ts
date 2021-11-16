@@ -1,16 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export interface ApiResponseDefaultData {
+export interface ApiResponseData {
   status: boolean;
   message: string;
 }
 
-export type ApiResponseData<T> = ApiResponseDefaultData & T;
-
-export interface ApiFuncs<GetType> {
+export interface ApiFuncs {
   GET?(
     req: NextApiRequest,
-    res: NextApiResponse<ApiResponseData<GetType>>
+    res: NextApiResponse<ApiResponseData>
   ): Promise<void>;
 
   POST?: Function;

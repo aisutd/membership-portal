@@ -1,6 +1,6 @@
 import AWS from "util/aws";
 
-interface auth {
+export interface auth {
   auth_status: boolean;
   auth_token: string;
   provider_sub: string;

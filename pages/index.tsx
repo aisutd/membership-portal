@@ -5,14 +5,15 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useEffect } from "react";
-import { subject } from "recoil/state";
-import { useRecoilState } from "recoil";
+import { subject, cognito_state } from "recoil/state";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import axios from "axios";
 
 const Home: NextPage = () => {
   const [session, loading] = useSession();
   const router = useRouter();
   const [sub, setSub] = useRecoilState(subject);
+  const auth_state = useRecoilValueLoadable(cognito_state);
 
   // for testing, will fetch profile information & load into recoil global state
   useEffect(() => {
@@ -32,6 +33,25 @@ const Home: NextPage = () => {
     }
   }, [loading, session, setSub]);
 
+  useEffect(() => {
+    switch (auth_state.state) {
+      case "hasValue":
+        console.log({
+          ...auth_state.contents,
+          stuff: "has value",
+        });
+      case "loading":
+        console.log({
+          loading: "loading",
+        });
+      case "hasError":
+        console.log({
+          ...auth_state.contents,
+          stuff: "has error",
+        });
+    }
+  }, [auth_state]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -42,7 +62,8 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://aisutd.org">Artificial Intelligence Society</a>
+          Welcome to{" "}
+          <a href="https://aisutd.org">Artificial Intelligence Society</a>
         </h1>
 
         <p className={styles.description}>Membership Portal</p>

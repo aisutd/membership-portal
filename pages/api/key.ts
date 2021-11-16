@@ -3,14 +3,14 @@ import { getSession } from "next-auth/client";
 import type { ApiFuncs, ApiResponseData } from "util/functions";
 import fetchAuthToken from "util/db/auth";
 
-interface Data {
+interface Data extends ApiResponseData {
   access_token: string;
   provider_sub: string;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ApiResponseData<Data>>
+  res: NextApiResponse<ApiResponseData>
 ) {
   const session = await getSession({ req });
 
@@ -20,19 +20,17 @@ export default async function handler(
       .json({
         status: false,
         message: "invalid session",
-        access_token: "",
-        provider_sub: "",
       });
     return;
   }
 
-  const method = req.method as keyof ApiFuncs<Data>;
+  const method = req.method as keyof ApiFuncs;
 
-  const handleCase: ApiFuncs<Data> = {
+  const handleCase: ApiFuncs = {
     // Response for GET requests
     GET: async (
       req: NextApiRequest,
-      res: NextApiResponse<ApiResponseData<Data>>
+      res: NextApiResponse<Data>
     ) => {
 
       try {
@@ -64,8 +62,6 @@ export default async function handler(
     res.status(405).json({
       status: false,
       message: "invalid method",
-      access_token: "",
-      provider_sub: "",
     });
   }
 }
