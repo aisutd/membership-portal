@@ -6,8 +6,6 @@ export const subject = atom({
   default: {
     email: "",
     next_id: "",
-    cognito_id: "",
-    access_token: "",
   },
 });
 

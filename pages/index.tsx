@@ -5,52 +5,25 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useEffect } from "react";
-import { subject, cognito_state } from "recoil/state";
-import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import axios from "axios";
+import { subject } from "recoil/state";
+import { useRecoilState } from "recoil";
+import { Suspense } from "react";
+import Card from "components/card";
 
 const Home: NextPage = () => {
   const [session, loading] = useSession();
   const router = useRouter();
   const [sub, setSub] = useRecoilState(subject);
-  const auth_state = useRecoilValueLoadable(cognito_state);
 
   // for testing, will fetch profile information & load into recoil global state
   useEffect(() => {
     if (session) {
-      (async () => {
-        const result = await axios.get("http://localhost:3000/api/key");
-        console.log(result.data);
-        if (result.data.status) {
-          setSub({
-            email: session.user?.email as string,
-            next_id: session.sub as string,
-            cognito_id: result.data.provider_id,
-            access_token: result.data.access_token,
-          });
-        }
-      })();
+      setSub({
+        email: session.user?.email as string,
+        next_id: session.sub as string,
+      });
     }
-  }, [loading, session, setSub]);
-
-  useEffect(() => {
-    switch (auth_state.state) {
-      case "hasValue":
-        console.log({
-          ...auth_state.contents,
-          stuff: "has value",
-        });
-      case "loading":
-        console.log({
-          loading: "loading",
-        });
-      case "hasError":
-        console.log({
-          ...auth_state.contents,
-          stuff: "has error",
-        });
-    }
-  }, [auth_state]);
+  }, [session, setSub]);
 
   return (
     <div className={styles.container}>
@@ -90,6 +63,10 @@ const Home: NextPage = () => {
               <p>Email: Not Signed In</p>
             </a>
           )}
+
+          <Suspense fallback={<div>Loading...</div>}>
+            <Card />
+          </Suspense>
 
           <a
             className={styles.card}
