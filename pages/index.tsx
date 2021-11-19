@@ -4,12 +4,26 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/client";
+import { useEffect } from "react";
+import { subject } from "recoil/state";
+import { useRecoilState } from "recoil";
+import { Suspense } from "react";
+import Card from "components/card";
 
 const Home: NextPage = () => {
   const [session, loading] = useSession();
   const router = useRouter();
+  const [sub, setSub] = useRecoilState(subject);
 
-  console.log(session);
+  // for testing, will fetch profile information & load into recoil global state
+  useEffect(() => {
+    if (session) {
+      setSub({
+        email: session.user?.email as string,
+        next_id: session.sub as string,
+      });
+    }
+  }, [session, setSub]);
 
   return (
     <div className={styles.container}>
@@ -22,10 +36,10 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to{" "}
-          <a href="https://aisutd.org">Artifical Intelligence Society</a>
+          <a href="https://aisutd.org">Artificial Intelligence Society</a>
         </h1>
 
-        <p className={styles.description}>AIS Membership Portal</p>
+        <p className={styles.description}>Membership Portal</p>
 
         <div className={styles.grid}>
           <a className={styles.card} onClick={() => signIn("cognito")}>
@@ -49,6 +63,10 @@ const Home: NextPage = () => {
               <p>Email: Not Signed In</p>
             </a>
           )}
+
+          <Suspense fallback={<div>Loading...</div>}>
+            <Card />
+          </Suspense>
 
           <a
             className={styles.card}

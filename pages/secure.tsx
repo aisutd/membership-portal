@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useSession } from "next-auth/client";
-import AccessDenied from "../components/AccessDenied";
-import styles from "../styles/Home.module.css";
+import AccessDenied from "components/AccessDenied";
+import styles from "styles/Home.module.css";
 
 
 const Authenticated: NextPage = () => {
