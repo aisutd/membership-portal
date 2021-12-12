@@ -11,7 +11,9 @@
 │   ├── _app.tsx
 │   ├── api
 ├── public
+├── recoil
 ├── styles
+├── util
 └── tsconfig.json
 ```
 
@@ -43,9 +45,17 @@ This contains all of the serverless API endpoints for our next js application
 
 This contains all the assets that can rendered statically by the application. Only essential assests should be stored here to avoid having a large github repo size.
 
+ - recoil
+
+This contains the state management tooling for the application. `recoil/state.ts` contains the definitions for all atoms and selectors. `recoil/actions/` stores the logic for populating all the async selectors.
+
  - styles
 
 Both global and component level styles should be stored here. Any custom tailwind configuration should be saved in this location.
+
+ - util
+
+Contains the initialization logic for `aws-sdk` and some shared typescript interfaces. `util/db` contains all the logic for working with the `dynamodb` database.
 
  - tsconfig.json
 

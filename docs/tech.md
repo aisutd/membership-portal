@@ -7,6 +7,7 @@ This project uses a variety of tools and technologies. The setup and configurati
  - [Next JS](https://nextjs.org)
  - [Material UI](https://mui.com)
  - [Tailwind CSS](https://tailwindcss.com)
+ - [Recoil](https://recoiljs.org)
 
 ### Backend
 
