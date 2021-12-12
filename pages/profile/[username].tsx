@@ -10,7 +10,7 @@ import { useRecoilState } from "recoil";
 import { Suspense } from "react";
 import Card from "components/card";
 
-const Home: NextPage = () => {
+const Profile: NextPage = () => {
   const [session, loading] = useSession();
   const router = useRouter();
   const [sub, setSub] = useRecoilState(subject);
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Membership Portal</title>
+        <title>Member Profile</title>
         <meta name="description" content="Join AIS Today!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to{" "}
-          <a href="https://aisutd.org">ABC Organization</a>
+          <a href="https://aisutd.org">Member Profile</a>
         </h1>
 
         <p className={styles.description}>Membership Portal</p>
@@ -96,4 +96,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Profile;

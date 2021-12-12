@@ -11,7 +11,18 @@ export interface ApiFuncs {
     res: NextApiResponse<ApiResponseData>
   ): Promise<void>;
 
-  POST?: Function;
-  PUT?: Function;
-  DELETE?: Function;
+  POST?(
+    req: NextApiRequest,
+    res: NextApiResponse<ApiResponseData>
+  ): Promise<void>;
+
+  PUT?(
+    req: NextApiRequest,
+    res: NextApiResponse<ApiResponseData>
+  ): Promise<void>;
+
+  DELETE?(
+    req: NextApiRequest,
+    res: NextApiResponse<ApiResponseData>
+  ): Promise<void>;
 }
