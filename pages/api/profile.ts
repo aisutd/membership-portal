@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import type { ApiFuncs, ApiResponseData } from "util/functions";
-import fetchProfile, { profile } from "util/db/profile";
+import { fetchProfile, profile } from "util/db/profile";
+import jsonwebtoken from "jsonwebtoken";
 
 interface Data extends ApiResponseData, profile {
 
@@ -33,7 +34,8 @@ export default async function handler(
     ) => {
 
       try {
-        const authItem = await fetchProfile("fd9c36c5-4524-420a-8f33-c892886ef367");
+        const decoded_token = jsonwebtoken.decode(req.headers['authorization']?.split(" ")[1] as string, { complete: true }) as any;
+        const authItem = await fetchProfile(decoded_token.payload.sub);
 
         res.json({
           status: true,

@@ -10,6 +10,7 @@ import { subject } from "recoil/state";
 import { useRecoilState } from "recoil";
 import ProfileCard from "components/Profile";
 import { Suspense } from "react";
+import AccessDenied from "components/AccessDenied";
 
 const Profile: NextPage = () => {
   const [session, loading] = useSession();
@@ -25,6 +26,16 @@ const Profile: NextPage = () => {
       });
     }
   }, [session, setSub]);
+
+  if (!session) {
+    return (
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <AccessDenied />
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -44,14 +55,12 @@ const Profile: NextPage = () => {
         <div className={styles.grid}>
           <a className={styles.card}>
             <h2>Locked Attributes &rarr;</h2>
-            <p>Email: {session?.user?.email}</p>
-            <p>Next ID: {session?.sub}</p>
-            <p>
-              User ID:{" "}
-              <Suspense fallback={<span>Loading...</span>}>
-                <AccountID />
-              </Suspense>
-            </p>
+            <p>Email: {(session?.user?.email as string).substring(0, 15)}...</p>
+            <p>Next ID: {(session?.sub as string).substring(0, 8)}...</p>
+
+            <Suspense fallback={<span>Loading...</span>}>
+              <AccountID />
+            </Suspense>
           </a>
 
           <Suspense fallback={<span>Loading...</span>}>

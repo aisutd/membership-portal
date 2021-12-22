@@ -5,7 +5,7 @@ const AccountID = () => {
     const user = useRecoilValue(cognito_state);
   
     return (
-      <p>{user.provider_sub}</p>
+      <p>User ID: {user.provider_sub.substring(0, 8)}...</p>
     );
   };
   

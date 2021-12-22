@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { DynamoDBAdapter } from "@next-auth/dynamodb-adapter"
 import AWS from "util/aws";
+import { updateProfile } from "util/db/profile";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -30,6 +31,9 @@ export default NextAuth({
     },
 
     async jwt(token, user, account, profile, isNewUser) {
+      if (isNewUser) {
+        await updateProfile(profile?.sub as string ?? "", token.sub as string ?? "");
+      }
       return token;
     },
   },

@@ -36,7 +36,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to{" "}
-          <a href="https://aisutd.org">ABC Organization</a>
+          <a href="https://aisutd.org">Artificial Intelligence Society</a>
         </h1>
 
         <p className={styles.description}>Membership Portal</p>
