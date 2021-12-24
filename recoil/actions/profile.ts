@@ -14,6 +14,7 @@ const fetch_profile = async (
       email: "",
       next_id: "",
       creation_date: (new Date()).toDateString(),
+      roles: [],
     };
   }
 
@@ -39,6 +40,7 @@ const fetch_profile = async (
         email: "",
         next_id: "",
         creation_date: (new Date()).toDateString(),
+        roles: [],
       };
     }
 
@@ -56,6 +58,7 @@ const fetch_profile = async (
       email: "",
       next_id: "",
       creation_date: (new Date()).toDateString(),
+      roles: [],
     };
   }
 };

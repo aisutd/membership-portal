@@ -8,6 +8,12 @@ export interface profile {
   email?: string;
   creation_date?: string;
   next_id?: string;
+  roles?: string[];
+}
+
+export interface profile_update_schema {
+  field: string;
+  value: string;
 }
 
 const fetchProfile = async (user_id: string): Promise<profile> => {
@@ -47,7 +53,7 @@ const fetchProfile = async (user_id: string): Promise<profile> => {
 
 const updateProfile = async (
   user_id: string,
-  next_id: string
+  update: profile_update_schema
 ): Promise<profile> => {
   if (user_id === "") {
     return {
@@ -62,9 +68,12 @@ const updateProfile = async (
     Key: {
       UserID: user_id, // partition key
     },
-    UpdateExpression: "set next_id = :n",
+    UpdateExpression: "set #key = :value",
+    ExpressionAttributeNames: {
+      "#key": update.field,
+    },
     ExpressionAttributeValues: {
-      ":n": next_id,
+      ":value": update.value,
     },
     ReturnValues: "ALL_NEW",
   };
