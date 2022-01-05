@@ -5,8 +5,6 @@ import styles from "../styles/Home.module.css";
 const ProfileCard = () => {
   const user = useRecoilValue(profile_state);
 
-  console.log(user);
-
   return (
     <a
       className={styles.card}
