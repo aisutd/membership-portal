@@ -17,7 +17,7 @@ export default async function handler(
 ) {
   const session = await getSession({ req });
 
-  if (!session) {
+  if (!session || req.headers["authorization"] === "") {
     res.status(401).json({
       status: false,
       message: "invalid session",

@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "styles/Home.module.css";
 import AccountID from "components/account_id";
 import { useRouter } from "next/router";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import { useEffect } from "react";
 import { subject } from "recoil/state";
 import { useRecoilState } from "recoil";
@@ -12,8 +12,6 @@ import ProfileCard from "components/Profile";
 import InputCard from "components/InputCard";
 import { Suspense } from "react";
 import AccessDenied from "components/AccessDenied";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 
 const Profile: NextPage = () => {
   const [session, loading] = useSession();
@@ -75,13 +73,6 @@ const Profile: NextPage = () => {
           </Suspense>
           <Suspense fallback={<span>Loading...</span>}>
             <InputCard field="netid" label="sample" help="change sampple here"/>
-          </Suspense>
-          <Suspense fallback={<span>Loading...</span>}>
-            <InputCard field="netid" label="whatever" help="change whatever here"/>
-          </Suspense>
-
-          <Suspense fallback={<span>Loading...</span>}>
-            <InputCard field="netid" label="roles" help="change roles here"/>
           </Suspense>
         </div>
       </main>

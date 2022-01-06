@@ -1,10 +1,11 @@
 import styles from "../styles/Home.module.css";
-import { cognito_state } from "recoil/state";
-import { useRecoilValue } from "recoil";
-import axios from "axios";
+// import { cognito_state } from "recoil/state";
+// import { useRecoilValue } from "recoil";
+// import axios from "axios";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import useAxiosInstance from "util/axios";
 
 interface props {
     field: string;
@@ -14,9 +15,9 @@ interface props {
 
 const InputCard = ({field, label, help}: props) => {
   const [data, setData] = useState("");
-  const auth = useRecoilValue(cognito_state);
+  const axios = useAxiosInstance();
 
-  const submit = () => {
+  const submit = async () => {
     if (data === "") {
         return;
     }
@@ -25,13 +26,9 @@ const InputCard = ({field, label, help}: props) => {
         field: field,
         value: data,
     }
-    const options = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.auth_token}`,
-        },
-      };
-    axios.put("http://localhost:3000/api/profile", body, options);
+    const res = await axios.put("/profile", body);
+
+    console.log(res.data);
     console.log(data);
   };
 
