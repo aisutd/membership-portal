@@ -1,10 +1,11 @@
 import AWS from "util/aws";
+import { profile } from "util/db/profile";
 
 export interface event {
   date: Date;
   Name: string;
   url: string;
-  Attendees?: string[];
+  Attendees?: string[] | profile[];
 }
 
 export interface event_update_schema {
@@ -13,12 +14,12 @@ export interface event_update_schema {
 }
 
 const fetchEvents = async (
+  ym: Date,
   getAttendees: boolean = false
 ): Promise<event[]> => {
-
   const docClient = new AWS.DynamoDB.DocumentClient();
   const table = "Events";
-  const pk = new Date().toISOString().substring(0, 7); // YYYY-MM
+  const pk = ym.toISOString().substring(0, 7); // YYYY-MM
 
   const params = {
     TableName: table,
@@ -34,9 +35,10 @@ const fetchEvents = async (
 
   try {
     const result = await docClient.query(params).promise();
+    
     result.Items?.forEach((item) => {
       events.push({
-        date: new Date(item.YearMonth + "-" + item.DayTime),
+        date: new Date(item.YearMonth + "-" + item.DayTime + " CST"),
         Name: item.EventName,
         url: item.url,
         Attendees: getAttendees ? item.Attendees : [],
@@ -59,7 +61,7 @@ const updateEventAttendance = async (
     TableName: table,
     Key: {
       YearMonth: update.eventDate.toISOString().substring(0, 7), // partition key
-      DayTime: update.eventDate.toISOString().substring(8,10), // sort key
+      DayTime: update.eventDate.toISOString().substring(8, 10), // sort key
     },
     UpdateExpression: "ADD #key :value",
     ExpressionAttributeNames: {
@@ -77,7 +79,9 @@ const updateEventAttendance = async (
     if (result.Attributes) {
       return {
         ...(result.Attributes as event),
-        date: new Date(result.Attributes.YearMonth + "-" + result.Attributes.DayTime),
+        date: new Date(
+          result.Attributes.YearMonth + "-" + result.Attributes.DayTime + " CST"
+        ),
         Name: result.Attributes.EventName,
       };
     }

@@ -7,6 +7,7 @@ import {
   fetchEvents,
   updateEventAttendance,
 } from "util/db/event";
+import { profile, fetchProfile } from "util/db/profile";
 
 interface DataGET extends ApiResponseData {
   events: event[];
@@ -36,13 +37,29 @@ export default async function handler(
     // Response for GET requests
     GET: async (req: NextApiRequest, res: NextApiResponse<DataGET>) => {
       try {
-        const events = await fetchEvents();
+        const events = await fetchEvents(new Date(), true);
+        const eventsWithAttendees: event[] = [];
+
+        for (const oneEvent of events) {
+          const attendees: profile[] = [];
+
+          for (const member of (oneEvent.Attendees as string[])) {
+            const attendee = await fetchProfile(member);
+            
+            if (attendee.exists) {
+              attendees.push(attendee);
+            }
+          }
+          oneEvent.Attendees = attendees;
+          eventsWithAttendees.push(oneEvent);
+        }
 
         res.json({
           status: true,
           message: "success",
-          events: events,
+          events: eventsWithAttendees,
         });
+        return;
       } catch (err) {
         console.log(err);
         res.json({
@@ -55,7 +72,7 @@ export default async function handler(
     // Response for PUT requests
     PUT: async (req: NextApiRequest, res: NextApiResponse<DataPUT>) => {
       try {
-        const events = await fetchEvents();
+        const events = await fetchEvents(new Date());
 
         for (const oneEvent of events) {
           if (
@@ -83,6 +100,7 @@ export default async function handler(
             status: false,
             message: "no matching event found",
           });
+          return;
         }
       } catch (err) {
         console.log(err);
