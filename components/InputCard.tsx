@@ -27,9 +27,6 @@ const InputCard = ({field, label, help}: props) => {
         value: data,
     }
     const res = await axios.put("/profile", body);
-
-    console.log(res.data);
-    console.log(data);
   };
 
   return (

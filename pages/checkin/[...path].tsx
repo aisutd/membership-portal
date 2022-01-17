@@ -8,7 +8,7 @@ import { useSession } from "next-auth/client";
 import { useEffect } from "react";
 import { subject } from "recoil/state";
 import { useRecoilState } from "recoil";
-import ProfileCard from "components/Profile";
+import EventCheckin from "components/EventCheckin";
 import InputCard from "components/InputCard";
 import { Suspense } from "react";
 import AccessDenied from "components/AccessDenied";
@@ -18,19 +18,15 @@ const Profile: NextPage = () => {
   const router = useRouter();
   const [sub, setSub] = useRecoilState(subject);
 
-  // for testing, will fetch profile information & load into recoil global state
-  useEffect(() => {
-    console.log(new Date().toISOString().substring(0,7));
-
-    console.log(new Date().toISOString().substring(8));
-
-    if (session) {
-      setSub({
-        email: session.user?.email as string,
-        next_id: session.sub as string,
-      });
-    }
-  }, [session, setSub]);
+//   // for testing, will fetch profile information & load into recoil global state
+//   useEffect(() => {
+//     if (session) {
+//       setSub({
+//         email: session.user?.email as string,
+//         next_id: session.sub as string,
+//       });
+//     }
+//   }, [session, setSub]);
 
   if (!session) {
     return (
@@ -45,38 +41,19 @@ const Profile: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Member Profile</title>
+        <title>Event Checkin</title>
         <meta name="description" content="Join AIS Today!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://aisutd.org">Member Profile</a>
-        </h1>
+        <h1 className={styles.title}>Event Check-in</h1>
 
-        <p className={styles.description}>Membership Portal</p>
+        <p className={styles.description}>Keep attending AIS Events!</p>
 
         <div className={styles.grid}>
-          <a className={styles.card}>
-            <h2>Locked Attributes &rarr;</h2>
-            <p>Email: {(session?.user?.email as string).substring(0, 15)}...</p>
-            <p>Next ID: {(session?.sub as string).substring(0, 8)}...</p>
-
-            <Suspense fallback={<span>Loading...</span>}>
-              <AccountID />
-            </Suspense>
-          </a>
-
           <Suspense fallback={<span>Loading...</span>}>
-            <ProfileCard />
-          </Suspense>
-
-          <Suspense fallback={<span>Loading...</span>}>
-            <InputCard field="netid" label="netid" help="change netid here"/>
-          </Suspense>
-          <Suspense fallback={<span>Loading...</span>}>
-            <InputCard field="netid" label="sample" help="change sampple here"/>
+            <EventCheckin />
           </Suspense>
         </div>
       </main>

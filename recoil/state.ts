@@ -24,3 +24,8 @@ export const profile_state = selector({
     return await fetch_profile(auth.provider_sub, auth.auth_token);
   }
 })
+
+export const events = atom({
+  key: "events",
+  default: [],
+});
