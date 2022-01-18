@@ -22,8 +22,6 @@ const EventCheckinBase = () => {
 
   const submit = async () => {
 
-    
-
     const payload = {
       code: data,
       cognito_id: user.user_id,

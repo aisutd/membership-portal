@@ -3,7 +3,6 @@ import { getSession } from "next-auth/client";
 import type { ApiFuncs, ApiResponseData } from "util/functions";
 import {
   event,
-  event_update_schema,
   fetchEvents,
   updateEventAttendance,
 } from "util/db/event";
@@ -64,7 +63,7 @@ export default async function handler(
         console.log(err);
         res.json({
           status: false,
-          message: "failed to fetch access token",
+          message: "failed to fetch events",
           events: [],
         });
       }

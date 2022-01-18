@@ -41,7 +41,7 @@ const fetchEvents = async (
         date: new Date(item.YearMonth + "-" + item.DayTime + " CST"),
         Name: item.EventName,
         url: item.url,
-        Attendees: getAttendees ? item.Attendees : [],
+        Attendees: getAttendees ? item.Attendees.values : [],
       });
     });
   } catch (err) {
