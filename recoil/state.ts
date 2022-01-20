@@ -2,6 +2,7 @@ import { atom, selector } from "recoil";
 import fetch_token from "recoil/actions/auth";
 import fetch_profile from "recoil/actions/profile";
 
+// stores email & sub from next-auth session
 export const subject = atom({
   key: "subject",
   default: {
@@ -10,6 +11,7 @@ export const subject = atom({
   },
 });
 
+// stores aws access token
 export const cognito_state = selector({
   key: "cognito_id",
   get: async ({ get }) => {
@@ -17,6 +19,7 @@ export const cognito_state = selector({
   },
 });
 
+// stores user profile
 export const profile_state = selector({
   key: "profile",
   get: async ({ get }) => {
@@ -25,6 +28,7 @@ export const profile_state = selector({
   }
 })
 
+// stores events
 export const events = atom({
   key: "events",
   default: [],

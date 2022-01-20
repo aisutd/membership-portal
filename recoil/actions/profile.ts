@@ -1,6 +1,7 @@
 import axios from "axios";
 import { profile } from "util/db/profile";
 
+// Fetch user's profile
 const fetch_profile = async (
   user_id: string,
   token: string

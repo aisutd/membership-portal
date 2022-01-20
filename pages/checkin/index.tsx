@@ -2,14 +2,12 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "styles/Home.module.css";
-import AccountID from "components/account_id";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
 import { useEffect } from "react";
 import { subject } from "recoil/state";
 import { useRecoilState } from "recoil";
 import EventCheckinBase from "components/EventCheckinBase";
-import InputCard from "components/InputCard";
 import { Suspense } from "react";
 import AccessDenied from "components/AccessDenied";
 

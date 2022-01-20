@@ -2,31 +2,13 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "styles/Home.module.css";
-import AccountID from "components/account_id";
-import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
-import { useEffect } from "react";
-import { subject } from "recoil/state";
-import { useRecoilState } from "recoil";
 import EventCheckin from "components/EventCheckin";
-import InputCard from "components/InputCard";
 import { Suspense } from "react";
 import AccessDenied from "components/AccessDenied";
 
 const Profile: NextPage = () => {
   const [session, loading] = useSession();
-  const router = useRouter();
-  const [sub, setSub] = useRecoilState(subject);
-
-//   // for testing, will fetch profile information & load into recoil global state
-//   useEffect(() => {
-//     if (session) {
-//       setSub({
-//         email: session.user?.email as string,
-//         next_id: session.sub as string,
-//       });
-//     }
-//   }, [session, setSub]);
 
   if (!session) {
     return (

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/client";
 import AccessDenied from "components/AccessDenied";
 import styles from "styles/Home.module.css";
 
-
+// Sample file to show how to check for a valid session state
 const Authenticated: NextPage = () => {
   const [ session, loading ] = useSession();
 
