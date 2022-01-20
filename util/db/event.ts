@@ -13,13 +13,19 @@ export interface event_update_schema {
   cognito_id: string;
 }
 
+/**
+ * Fetch events from dynamodb
+ * @param ym Date object used to identify which year & month partition key to fetch events from
+ * @param getAttendees bool to determine whether to return attendees information or empty array
+ * @returns list of events in a given month
+ */
 const fetchEvents = async (
   ym: Date,
   getAttendees: boolean = false
 ): Promise<event[]> => {
   const docClient = new AWS.DynamoDB.DocumentClient();
   const table = "Events";
-  const pk = ym.toISOString().substring(0, 7); // YYYY-MM
+  const pk = ym.toISOString().substring(0, 7); // YYYY-MM // partition key
 
   const params = {
     TableName: table,
@@ -38,7 +44,7 @@ const fetchEvents = async (
     
     result.Items?.forEach((item) => {
       events.push({
-        date: new Date(item.YearMonth + "-" + item.DayTime + " CST"),
+        date: new Date(item.YearMonth + "-" + item.DayTime + " CST"), // set correct timezone
         Name: item.EventName,
         url: item.url,
         Attendees: getAttendees ? item.Attendees.values : [],
@@ -51,6 +57,11 @@ const fetchEvents = async (
   return events;
 };
 
+/**
+ * Update an event with the id of user who has checked in
+ * @param update update operation data
+ * @returns updated event document
+ */
 const updateEventAttendance = async (
   update: event_update_schema
 ): Promise<event | null> => {
@@ -80,7 +91,7 @@ const updateEventAttendance = async (
       return {
         ...(result.Attributes as event),
         date: new Date(
-          result.Attributes.YearMonth + "-" + result.Attributes.DayTime + " CST"
+          result.Attributes.YearMonth + "-" + result.Attributes.DayTime + " CST" // set correct timezone
         ),
         Name: result.Attributes.EventName,
       };

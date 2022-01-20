@@ -17,6 +17,7 @@ export default async function handler(
 ) {
   const session = await getSession({ req });
 
+  // Require next-auth session & AWS Authorization header
   if (!session || req.headers["authorization"] === "") {
     res.status(401).json({
       status: false,
@@ -36,6 +37,7 @@ export default async function handler(
     // Response for GET requests
     GET: async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       try {
+        // Use the cognito id from the authorization token to prevent user from tampering with the request
         const authItem = await fetchProfile(decoded_token.payload.sub);
 
         res.json({
@@ -52,7 +54,11 @@ export default async function handler(
         });
       }
     },
-    // Response for PUT requests
+    /**
+     * Update single field on user's profile
+     * @param req NextApiRequest
+     * @param res NextApiResponse<Data>
+     */
     PUT: async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       try {
         const updateOperation: profile_update_schema = {

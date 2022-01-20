@@ -6,6 +6,11 @@ export interface auth {
   provider_sub: string;
 }
 
+/**
+ * Fetch AWS Authorization token from dynamodb table used by next-auth
+ * @param next_id sub from next-auth session
+ * @returns auth
+ */
 const fetchAuthToken = async (next_id: string): Promise<auth> => {
   // default return value (will be modified by query)
   let ret_value: auth = {

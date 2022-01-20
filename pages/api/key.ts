@@ -27,7 +27,11 @@ export default async function handler(
   const method = req.method as keyof ApiFuncs;
 
   const handleCase: ApiFuncs = {
-    // Response for GET requests
+    /**
+     * Fetch user's auth token and cognito id from next-auth session database entry
+     * @param req 
+     * @param res 
+     */
     GET: async (
       req: NextApiRequest,
       res: NextApiResponse<Data>
