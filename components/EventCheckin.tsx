@@ -31,7 +31,7 @@ const EventCheckin = () => {
       setSuccess(res.data.status);
       setLoading(false);
     })();
-  }, []);
+  }, [router, user]);
 
   return (
     <a
