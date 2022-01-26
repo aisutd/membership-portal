@@ -6,7 +6,7 @@ const fetch_profile = async (
   user_id: string,
   token: string
 ): Promise<Required<profile>> => {
-  if (user_id === "" || token === "" || process.env.CI) {
+  if (user_id === "" || token === "") {
     return {
       exists: false,
       user_id: user_id,

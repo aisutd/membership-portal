@@ -3,7 +3,7 @@ import { auth } from "util/db/auth";
 
 const fetch_token = async (next_id: string): Promise<auth> => {
   try {
-    if (process.env.CI) {
+    if (next_id === "") {
       return {
         auth_status: false,
         auth_token: "",
