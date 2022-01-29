@@ -12,6 +12,10 @@ module.exports = {
           lightest: '#f9fafc',
         }
       },
+      spacing: {
+        '30%': '30%',
+        '40%': '40%'
+      }
     },
   },
   variants: {
