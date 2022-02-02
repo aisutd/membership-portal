@@ -10,6 +10,7 @@ import { useRecoilState } from "recoil";
 import EventCheckinBase from "components/EventCheckinBase";
 import { Suspense } from "react";
 import AccessDenied from "components/AccessDenied";
+import Sidebar from "components/Sidebar";
 
 const Profile: NextPage = () => {
   const [session, loading] = useSession();
@@ -43,31 +44,17 @@ const Profile: NextPage = () => {
         <meta name="description" content="Join AIS Today!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>Event Check-in</h1>
-
-        <p className={styles.description}>Keep attending AIS Events!</p>
-
-        <div className={styles.grid}>
-          <Suspense fallback={<span>Loading...</span>}>
-            <EventCheckinBase />
-          </Suspense>
+      <main className="fixed flex w-full h-full">
+        <Sidebar></Sidebar>
+        <div className="flex flex-col w-full h-full">
+          <h1 className="text-left text-3xl font-bold pl-10 pt-12">Check In</h1>
+          <div className="w-full pl-10 pt-5 pr-4">
+            <Suspense fallback={<span>Loading...</span>}>
+              <EventCheckinBase />
+            </Suspense>
+          </div>
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   );
 };
