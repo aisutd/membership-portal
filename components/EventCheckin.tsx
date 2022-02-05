@@ -1,13 +1,17 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { profile_state } from "recoil/state";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/client";
+import { subject } from "recoil/state";
 import axios from "axios";
 
 const EventCheckin = () => {
   const user = useRecoilValue(profile_state);
   const router = useRouter();
+  const [session] = useSession();
+  const [sub, setSub] = useRecoilState(subject);
 
 
   const [success, setSuccess] = useState(false);
@@ -16,6 +20,19 @@ const EventCheckin = () => {
   const [eventName, setEventName] = useState("");
 
   useEffect(() => {
+    if (session) {
+      setSub({
+        email: session.user?.email as string,
+        next_id: session.sub as string,
+      });
+    }
+  }, [session, setSub]);
+
+  useEffect(() => {
+    if(!user) {
+      return;
+    }
+
     const payload = {
       code: router.asPath.split("/checkin/")[1],
       cognito_id: user.user_id,

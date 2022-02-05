@@ -15,7 +15,6 @@ const Home: NextPage = () => {
   const router = useRouter();
   const [sub, setSub] = useRecoilState(subject);
 
-  // for testing, will fetch profile information & load into recoil global state
   useEffect(() => {
     if (session) {
       setSub({

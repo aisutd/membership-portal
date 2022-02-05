@@ -1,5 +1,6 @@
 import axios from "axios";
 import { auth } from "util/db/auth";
+import env from "util/env";
 
 const fetch_token = async (next_id: string): Promise<auth> => {
   try {
@@ -11,8 +12,7 @@ const fetch_token = async (next_id: string): Promise<auth> => {
       };
     }
 
-    // TODO: import an axios instance with pre-configured base url
-    const res = await axios.get("http://localhost:3000/api/key");
+    const res = await axios.get("/api/key");
 
     return {
       auth_status: res.data.status,
