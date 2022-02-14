@@ -110,8 +110,8 @@ const SignIn: NextPage = () => {
           <div className="hidden lg:block bg-white w-screen h-screen right-0 relative">
             <div className="flex flex-col justify-center items-center pt-30%">
               <p className="text-black text-2xl font-bold tracking-wide">
-                Sign In/ Sign <br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Up
+                Sign In / Sign Up<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </p>
               <a onClick={() => signIn("cognito")}>
                 <img src="/google_btn.png" alt="AIS logo" width={330} />
