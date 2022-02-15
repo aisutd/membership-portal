@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import AccessDenied from "./AccessDenied";
 
 const EventCheckin = () => {
   const user = useRecoilValue(profile_state);
@@ -33,6 +34,10 @@ const EventCheckin = () => {
     })();
   }, []);
 
+  if (!user.roles.includes('Members')) {
+    return (<AccessDenied />)
+  }
+  
   return (
     <a
       className={styles.card}

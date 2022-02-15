@@ -9,14 +9,10 @@ import moment from 'moment';
 const EventCheckinBase = () => {
   const user = useRecoilValue(profile_state);
   const router = useRouter();
-
-
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [check, setCheck] = useState(false);
-
   const [data, setData] = useState("");
-
   const [eventName, setEventName] = useState("");
 
   const submit = async () => {
@@ -38,8 +34,9 @@ const EventCheckinBase = () => {
   }
 
   return (
-    <div className="max-w-md rounded overflow-visible shadow-lg">
-      <div className="px-6 py-4">
+    //className="max-w-md rounded overflow-visible shadow-lg"
+    <div>
+      {/* <div className="px-6 py-4">
         <div className="font-bold text-sm text-indigo-600">SOCIAL EVENT</div>
         <div className="font-bold text-xl">AIS Member-Wide Meeting</div>
         <p className="text-gray-700 text-base">
@@ -55,29 +52,29 @@ const EventCheckinBase = () => {
         <div className="font-bold text-sm mb-2">Tags</div>
         <span className="inline-block bg-indigo-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">social</span>
         <span className="inline-block bg-indigo-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">members</span>
-      </div>
+      </div> */}
       {success ? (
         <>
-        <div className="px-6 font-bold text-md ">CHECKED IN &#9989;</div>
+          <div className="px-6 font-bold text-md ">CHECKED IN &#9989;</div>
         </>
       ) : (
         <>
-        <div className="px-6 pt-2 pb-2 flex flex-row">
-        <div className="mb-3 pt-0">
-          <input
-            type="text"
-            placeholder="Code"
-            className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
-            onChange={(e) => {
-              setData(e.target.value);
-            }}
-          />
-        </div>
-        <button className="text-blue-500 background-transparent font-bold uppercase px-3 py-1 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={submit}>
-          Check in
-        </button>
-      </div>
-      </>
+          <div className="px-6 pt-2 pb-2 flex flex-row">
+            <div className="mb-3 pt-0">
+              <input
+                type="text"
+                placeholder="Code"
+                className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                onChange={(e) => {
+                  setData(e.target.value);
+                }}
+              />
+            </div>
+            <button className="text-blue-500 background-transparent font-bold uppercase px-3 py-1 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={submit}>
+              Check in
+            </button>
+          </div>
+        </>
       )}
       {/* <div className="px-6 pt-2 pb-2 flex flex-row">
         <div className="mb-3 pt-0">

@@ -1,8 +1,10 @@
 import 'tailwindcss/tailwind.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase, faCalendar, faHandPaper, faHome, faNewspaper, faUser } from '@fortawesome/free-solid-svg-icons'
+import { useSession } from "next-auth/client";
 
 const Sidebar = () => {
+    const [session, loading] = useSession();
     return (
         <div className="overflow-hidden w-30 md:w-80 space-y-6 py-7 px-2 relative inset-y-0 left-0 transition duration-200 ease-in-out h-screen shadow-md bg-gray-900 overflow-y-auto">
             <div className="pt-8 pb-2 px-6">
@@ -11,8 +13,8 @@ const Sidebar = () => {
                             <img src="/favicon.ico" className="rounded-full w-20 h-20 border-2 border-white" alt="Avatar" />
                         </div>
                         <div className="grow ml-3 text-center">
-                            <p className="text-sm font-semibold text-white pt-6">First Last</p>
-                            <p className="text-sm font-semibold text-white">first.last@utdallas.edu</p>
+                            <p className="text-sm font-semibold text-white pt-6">AIS Member</p>
+                            <p className="text-sm font-semibold text-white">{session.user?.email}</p>
                         </div>
                     </div>
             </div>
@@ -25,7 +27,7 @@ const Sidebar = () => {
                         <p className="hidden md:block w-3/4 text-left  mt-1 text-md">Home</p>
                     </div>
                 </a>
-                <a href="" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                {/* <a href="" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
                     <div className="flex flex-row">
                         <p className="w-1/4">
                             <FontAwesomeIcon className="w-6 h-6" icon={faNewspaper} />
@@ -48,7 +50,7 @@ const Sidebar = () => {
                         </p>
                         <p className="hidden md:block w-3/4 text-left  mt-1 text-md">User Profile</p>
                     </div>
-                </a>
+                </a> */}
                 <a href="" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
                     <div className="flex flex-row">
                         <p className="w-1/4">
@@ -57,14 +59,14 @@ const Sidebar = () => {
                         <p className="hidden md:block w-3/4 text-left  mt-1 text-md">Attendance</p>
                     </div>
                 </a>
-                <a href="" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                {/* <a href="" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
                     <div className="flex flex-row">
                         <p className="w-1/4">
                             <FontAwesomeIcon className="w-6 h-6" icon={faBriefcase} />
                         </p>
                         <p className="hidden md:block w-3/4 text-left  mt-1 text-md">Open Applications</p>
                     </div>
-                </a>
+                </a> */}
             </nav>
             <div className="hidden md:flex md:flex-row px-6 pb-8 fixed bottom-0 justify-center space-x-6">
                 <div>
