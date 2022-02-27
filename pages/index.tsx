@@ -12,7 +12,6 @@ import { Suspense } from "react";
 import Card from "components/card";
 import Sidebar from "components/Sidebar";
 
-
 const Home: NextPage = () => {
   const [session, loading] = useSession();
   const router = useRouter();
@@ -51,7 +50,7 @@ const Home: NextPage = () => {
               </div>
               <div className="max-w-md rounded overflow-visible shadow-lg px-6">
                 <p className="text-black font-medium text-center text-lg">Click <a className="text-blue-700" href="/checkin">here</a> to go to Check In Page</p>
-              {/* <ul className="list-disc pl-2">
+                {/* <ul className="list-disc pl-2">
                   <li>Now this is a story all about how, my life got flipped turned upside down</li>
                   <li>Now this is a story all about how, my life got flipped turned upside down</li>
                   <li>Now this is a story all about how, my life got flipped turned upside down</li>
