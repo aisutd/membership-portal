@@ -59,18 +59,18 @@ const EventCheckinBase = () => {
         </>
       ) : (
         <>
-          <div className="px-6 pt-2 pb-2 flex flex-row">
+          <div className="px-6 pt-2 pb-2 flex flex-wrap gap-x-8 gap-y-4 items-center">
             <div className="mb-3 pt-0">
               <input
                 type="text"
                 placeholder="Code"
-                className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-gray-200 rounded text-sm border-0 shadow-lg outline-none focus:outline-none focus:ring w-56"
                 onChange={(e) => {
                   setData(e.target.value);
                 }}
               />
             </div>
-            <button className="text-blue-500 background-transparent font-bold uppercase px-3 py-1 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={submit}>
+            <button className=" rounded-full text-white bg-blue-500 font-bold uppercase px-3 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-36 h-12" type="button" onClick={submit}>
               Check in
             </button>
           </div>

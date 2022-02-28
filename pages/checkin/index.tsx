@@ -47,7 +47,7 @@ const Profile: NextPage = () => {
       <main className="fixed flex w-full h-full">
         <Sidebar></Sidebar>
         <div className="flex flex-col w-full h-full">
-          <h1 className="text-left text-3xl font-bold pl-10 pt-12">Check In</h1>
+          <h1 className="text-left text-3xl font-bold pl-16 pt-12">Check In</h1>
           <div className="w-full pl-10 pt-5 pr-4">
             <Suspense fallback={<span>Loading...</span>}>
               <EventCheckinBase />

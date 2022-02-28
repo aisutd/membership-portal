@@ -12,7 +12,7 @@ const SignIn: NextPage = () => {
       <Head>
         <title>Sign In</title>
         <meta name="description" content="Sign In to AIS Portal!" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </Head>
 
       <main>
@@ -29,29 +29,19 @@ const SignIn: NextPage = () => {
 
             <div className="flex flex-col justify-center items-center">
               <div>
-                <p className="text-white text-5xl font-sans subpixel-antialiase tracking-wide font-bold text-center">AIS Membership</p>
+                <p className="text-white text-5xl mx-12 md:mx-24 xl:mx-36 font-sans subpixel-antialiase tracking-wide font-bold text-center">AIS Membership Portal</p>
               </div>
-              <div>
-                <p className="text-white text-5xl font-sans subpixel-antialiase justify-center tracking-wide font-bold text-center">Portal</p>
-              </div>
-              <div className="justify-center mt-2">
-                <p className="text-white text-lg font-sans subpixel-antialiase tracking-wide font-bold text-center">
-                  Welcome to the Membership Portal. Here you can find
+              <div className="justify-center mt-2 mx-8 lg:mx-24">
+                <p className="text-white  md:text-lg font-sans subpixel-antialiase tracking-wide font-bold text-center">
+                  Welcome to the Membership Portal. Here you can find information about our exclusive events, open applications, and attendance information
                 </p>
-                <p className="text-white text-lg font-sans subpixel-antialiase tracking-wide font-bold text-center">
-                  information about our exclusive events, open
-                </p>
-                <p className="text-white text-lg font-sans subpixel-antialiase tracking-wide font-bold text-center">
-                  applications, and attendance information
-                </p>
+                
               </div>
               <div className="pt-5 place-items-center lg:hidden">
                 <p className="text-white text-2xl font-bold tracking-wide text-center">
-                  Sign In/ Sign <br />
+                  Sign In / Sign Up
                 </p>
-                <p className="text-white text-2xl font-bold tracking-wide text-center">
-                  Up
-                </p>
+              
                 <div className="items-center">
                   <a onClick={() => signIn("cognito")}>
                     <img src="/google_btn.png" alt="AIS logo" width={330} />

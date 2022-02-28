@@ -38,24 +38,21 @@ const Home: NextPage = () => {
       <Head>
         <title>Membership Portal</title>
         <meta name="description" content="Join AIS Today!" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </Head>
       <main className="fixed flex w-full h-full">
-        <Sidebar></Sidebar>
-        <div className="flex flex-col w-full h-full">
-          <div className="w-full pl-10 pt-5 pr-4">
+        <Sidebar />
+        <div className="flex h-screen justify-center items-center w-full">
+          <div className="w-full pl-10 pt-5 pr-4 ">
             <div>
-              <div className="px-6 pt-2 pb-2 flex flex-row">
-                <p className="text-3xl text-center text-black font-bold tracking-wide">Welcome to AIS Membership Portal</p>
+              <div className="px-6 pt-2 pb-2 flex justify-center">
+                <div>
+                <div><p className="text-3xl text-center text-black font-bold tracking-wide">Welcome to AIS Membership Portal</p></div>
+                <div> <p className="text-black font-medium text-center text-lg">Click <a className="text-blue-700" href="/checkin">here</a> to check-in!</p></div>
+                </div>              
               </div>
               <div className="max-w-md rounded overflow-visible shadow-lg px-6">
-                <p className="text-black font-medium text-center text-lg">Click <a className="text-blue-700" href="/checkin">here</a> to go to Check In Page</p>
-                {/* <ul className="list-disc pl-2">
-                  <li>Now this is a story all about how, my life got flipped turned upside down</li>
-                  <li>Now this is a story all about how, my life got flipped turned upside down</li>
-                  <li>Now this is a story all about how, my life got flipped turned upside down</li>
-                  <li>Now this is a story all about how, my life got flipped turned upside down</li>
-                </ul> */}
+                
               </div>
             </div>
           </div>

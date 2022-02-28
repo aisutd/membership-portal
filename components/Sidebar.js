@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import 'tailwindcss/tailwind.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase, faCalendar, faHandPaper, faHome, faNewspaper, faUser } from '@fortawesome/free-solid-svg-icons'
@@ -14,7 +15,8 @@ const Sidebar = () => {
                 <div className="pt-8 pb-2 px-6">
                     <div className="hidden md:flex flex-col items-center">
                         <div className="shrink-0">
-                            <Image src="/favicon.ico" className="rounded-full w-20 h-20 border-2 border-white" alt="Avatar" />
+                            <div className="rounded-full w-20 h-20  border-white bg-gradient-to-bl from-blue-400 to-blue-800 " alt="Avatar" > </div>
+                            {/* <img src="/favicon.ico" className="rounded-full w-20 h-20 border-2 border-white" alt="Avatar" /> */}
                         </div>
                         <div className="grow ml-3 text-center">
                             <p className="text-sm font-semibold text-white pt-6">AIS Member</p>
@@ -22,8 +24,8 @@ const Sidebar = () => {
                         </div>
                     </div>
                 </div>
-                <nav className="flex-grow items-center pt-10 space-y-4 px-4">
-                    <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                <nav className="flex-grow items-center  space-y-4 px-4">
+                    <a href="/" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
                         <div className="flex flex-row">
                             <p className="w-1/4">
                                 <FontAwesomeIcon className="w-6 h-6" icon={faHome} />
@@ -55,7 +57,7 @@ const Sidebar = () => {
                         <p className="hidden md:block w-3/4 text-left  mt-1 text-md">User Profile</p>
                     </div>
                 </a> */}
-                    <a href="" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                    <a href="/checkin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
                         <div className="flex flex-row">
                             <p className="w-1/4">
                                 <FontAwesomeIcon className="w-6 h-6" icon={faHandPaper} />
@@ -98,9 +100,36 @@ const Sidebar = () => {
             </div>
             <div className="md:hidden">
                 <Menu styles={ styles }>
-                    <Link id="home" className="menu-item"  href="/">Home</Link>
-                    <Link id="about" className="menu-item"  href="/checkin">Attendance</Link>
+                    <div className=" md:flex flex-col items-center justify-center pb-8">
+                        <div className="shrink-0 flex justify-center">
+                            <div className="rounded-full w-20 h-20  border-white bg-gradient-to-bl from-blue-400 to-blue-800 " alt="Avatar" > </div>
+                            {/* <img src="/favicon.ico" className="rounded-full w-20 h-20 border-2 border-white" alt="Avatar" /> */}
+                        </div>
+                        <div className="grow ml-3 text-center">
+                            <p className="text-sm font-semibold text-white pt-6">AIS Member</p>
+                            <p className="text-sm font-semibold text-white">{session.user?.email}</p>
+                        </div>
+                    </div>
+                    <a href="/" className="menu-item block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                        <div className="flex flex-row">
+                            <p className="w-1/4">
+                                <FontAwesomeIcon className="w-6 h-6" icon={faHome} />
+                            </p>
+                            <p className=" md:block w-3/4 text-left  mt-1 text-md">Home</p>
+                        </div>
+                    </a>
+                    <a href="/checkin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                        <div className="flex flex-row">
+                            <p className="w-1/4">
+                                <FontAwesomeIcon className="w-6 h-6" icon={faHandPaper} />
+                            </p>
+                            <p className=" md:block w-3/4 text-left text-md">Attendance</p>
+                        </div>
+                    </a>
+                    
+                
                 </Menu>
+                
             </div>
         </div>
     )
@@ -132,7 +161,7 @@ var styles = {
       height: '100%'
     },
     bmMenu: {
-      background: '#373a47',
+      background: '#111827',
       padding: '2.5em 1.5em 0',
       fontSize: '1.25em'
     },
