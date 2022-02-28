@@ -15,6 +15,7 @@ export default NextAuth({
     }),
     // ...add more providers here
   ],
+  debug: process.env.NODE_ENV === 'development' ? true : false,
   adapter: DynamoDBAdapter(new AWS.DynamoDB.DocumentClient()),
   session: {
     jwt: true,

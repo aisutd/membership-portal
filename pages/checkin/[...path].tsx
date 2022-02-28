@@ -38,7 +38,7 @@ const Profile: NextPage = () => {
       <Head>
         <title>Event Checkin</title>
         <meta name="description" content="Join AIS Today!" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </Head>
 
       <main className={styles.main}>

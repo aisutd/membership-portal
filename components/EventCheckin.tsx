@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import { subject } from "recoil/state";
 import axios from "axios";
+import AccessDenied from "./AccessDenied";
 
 const EventCheckin = () => {
   const user = useRecoilValue(profile_state);
@@ -50,6 +51,10 @@ const EventCheckin = () => {
     })();
   }, [router, user]);
 
+  if (!user.roles.includes('Members')) {
+    return (<AccessDenied />)
+  }
+  
   return (
     <a
       className={styles.card}
