@@ -1,7 +1,11 @@
-import { useRecoilValue } from "recoil";
-import { profile_state } from "recoil/state";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { profile_state, subject } from "recoil/state";
+import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useSession } from "next-auth/client";
 import axios from "axios";
 import 'tailwindcss/tailwind.css'
 import moment from 'moment';
@@ -9,13 +13,29 @@ import moment from 'moment';
 const EventCheckinBase = () => {
   const user = useRecoilValue(profile_state);
   const router = useRouter();
+  const [session] = useSession();
+  const [sub, setSub] = useRecoilState(subject);
+
+
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [check, setCheck] = useState(false);
   const [data, setData] = useState("");
   const [eventName, setEventName] = useState("");
 
+  useEffect(() => {
+    if (session) {
+      setSub({
+        email: session.user?.email as string,
+        next_id: session.sub as string,
+      });
+    }
+  }, [session, setSub]);
+
   const submit = async () => {
+    if (!user) {
+      return;
+    }
 
     const payload = {
       code: data,

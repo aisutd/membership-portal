@@ -20,8 +20,10 @@ const fetchAuthToken = async (next_id: string): Promise<auth> => {
   };
 
   if (next_id === "") {
+    console.log("Whoops a daisy");
     return ret_value;
   }
+
 
   const docClient = new AWS.DynamoDB.DocumentClient();
   const table = "next-auth";

@@ -11,15 +11,13 @@ import { useRecoilState } from "recoil";
 import { Suspense } from "react";
 import Card from "components/card";
 import Sidebar from "components/Sidebar";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   const [session, loading] = useSession();
   const router = useRouter();
   const [sub, setSub] = useRecoilState(subject);
 
-  console.log(session);
-  console.log(process.env.COGNITO_DOMAIN)
-  // for testing, will fetch profile information & load into recoil global state
   useEffect(() => {
     if (session) {
       setSub({
@@ -48,7 +46,7 @@ const Home: NextPage = () => {
               <div className="px-6 pt-2 pb-2 flex justify-center">
                 <div>
                 <div><p className="text-3xl text-center text-black font-bold tracking-wide">Welcome to AIS Membership Portal</p></div>
-                <div> <p className="text-black font-medium text-center text-lg">Click <a className="text-blue-700" href="/checkin">here</a> to check-in!</p></div>
+                <div> <p className="text-black font-medium text-center text-lg">Click <Link href="/checkin" passHref><a className="text-blue-700" >here</a></Link> to check-in!</p></div>
                 </div>              
               </div>
               <div className="max-w-md rounded overflow-visible shadow-lg px-6">

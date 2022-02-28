@@ -25,14 +25,16 @@ const Sidebar = () => {
                     </div>
                 </div>
                 <nav className="flex-grow items-center  space-y-4 px-4">
-                    <a href="/" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
-                        <div className="flex flex-row">
-                            <p className="w-1/4">
-                                <FontAwesomeIcon className="w-6 h-6" icon={faHome} />
-                            </p>
-                            <p className="hidden md:block w-3/4 text-left  mt-1 text-md">Home</p>
-                        </div>
-                    </a>
+                    <Link href="/" passHref>
+                        <a href="/" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                            <div className="flex flex-row">
+                                <p className="w-1/4">
+                                    <FontAwesomeIcon className="w-6 h-6" icon={faHome} />
+                                </p>
+                                <p className="hidden md:block w-3/4 text-left  mt-1 text-md">Home</p>
+                            </div>
+                        </a>
+                    </Link>
                     {/* <a href="" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
                     <div className="flex flex-row">
                         <p className="w-1/4">
@@ -57,14 +59,16 @@ const Sidebar = () => {
                         <p className="hidden md:block w-3/4 text-left  mt-1 text-md">User Profile</p>
                     </div>
                 </a> */}
-                    <a href="/checkin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
-                        <div className="flex flex-row">
-                            <p className="w-1/4">
-                                <FontAwesomeIcon className="w-6 h-6" icon={faHandPaper} />
-                            </p>
-                            <p className="hidden md:block w-3/4 text-left  mt-1 text-md">Attendance</p>
-                        </div>
-                    </a>
+                    <Link href="/checkin" passHref>
+                        <a href="/checkin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                            <div className="flex flex-row">
+                                <p className="w-1/4">
+                                    <FontAwesomeIcon className="w-6 h-6" icon={faHandPaper} />
+                                </p>
+                                <p className="hidden md:block w-3/4 text-left  mt-1 text-md">Attendance</p>
+                            </div>
+                        </a>
+                    </Link>
                     {/* <a href="" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
                     <div className="flex flex-row">
                         <p className="w-1/4">
@@ -110,24 +114,26 @@ const Sidebar = () => {
                             <p className="text-sm font-semibold text-white">{session.user?.email}</p>
                         </div>
                     </div>
-                    <a href="/" className="menu-item block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
-                        <div className="flex flex-row">
-                            <p className="w-1/4">
-                                <FontAwesomeIcon className="w-6 h-6" icon={faHome} />
-                            </p>
-                            <p className=" md:block w-3/4 text-left  mt-1 text-md">Home</p>
-                        </div>
-                    </a>
-                    <a href="/checkin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
-                        <div className="flex flex-row">
-                            <p className="w-1/4">
-                                <FontAwesomeIcon className="w-6 h-6" icon={faHandPaper} />
-                            </p>
-                            <p className=" md:block w-3/4 text-left text-md">Attendance</p>
-                        </div>
-                    </a>
-                    
-                
+                    <Link href="/" passHref>
+                        <a className="menu-item block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                            <div className="flex flex-row">
+                                <p className="w-1/4">
+                                    <FontAwesomeIcon className="w-6 h-6" icon={faHome} />
+                                </p>
+                                <p className=" md:block w-3/4 text-left  mt-1 text-md">Home</p>
+                            </div>
+                        </a>
+                    </Link>
+                    <Link href="/checkin" passHref>
+                        <a href="/checkin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                            <div className="flex flex-row">
+                                <p className="w-1/4">
+                                    <FontAwesomeIcon className="w-6 h-6" icon={faHandPaper} />
+                                </p>
+                                <p className=" md:block w-3/4 text-left text-md">Attendance</p>
+                            </div>
+                        </a>
+                    </Link>
                 </Menu>
                 
             </div>

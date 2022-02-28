@@ -3,6 +3,7 @@ import { profile_state } from "recoil/state";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/client";
 import Button from "@mui/material/Button";
 import { event } from "util/db/event";
 import { profile } from "util/db/profile";
@@ -12,24 +13,25 @@ import AccessDenied from "components/AccessDenied";
 const EventAttendance = () => {
   const user = useRecoilValue(profile_state);
   const router = useRouter();
+  const [session, loading] = useSession();
 
   const [events, setEvents] = useState<event[]>([]);
 
   const submit = async () => {
     const res = await axios.get(router.basePath + "/api/event");
-
-    console.log(user);
-
     setEvents(res.data.events);
   };
+  
 
   useEffect(() => {
     if (events.length === 0) {
       return;
     }
+    console.log(events);
   }, [events]);
 
   if (!user.roles.includes('Officers')) {
+    console.log(user);
     return (<AccessDenied />)
   }
 

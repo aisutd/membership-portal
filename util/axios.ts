@@ -1,14 +1,18 @@
 import axios, { AxiosInstance, AxiosRequestHeaders } from "axios";
 import { useRecoilValue } from "recoil";
 import { cognito_state } from "recoil/state";
+import env from "util/env";
+import { useRouter } from "next/router";
 /**
  * React Hook that returns an axios instance with the Authorization header prefilled
  * @returns AxiosInstance
  */
 const useAxiosInstance = (): AxiosInstance => {
   const auth = useRecoilValue(cognito_state);
+  const router = useRouter();
+
   const defaultOptions = {
-    baseURL: "http://localhost:3000/api",
+    baseURL: router.basePath + "/api",
     headers: {
       "Content-Type": "application/json",
     },

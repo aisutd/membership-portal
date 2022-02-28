@@ -1,5 +1,6 @@
 import axios from "axios";
 import { profile } from "util/db/profile";
+import env from "util/env";
 
 // Fetch user's profile
 const fetch_profile = async (
@@ -29,8 +30,7 @@ const fetch_profile = async (
       },
     };
 
-    // TODO: import an axios instance with pre-configured base url
-    const res = await axios.get("http://localhost:3000/api/profile", options);
+    const res = await axios.get("/api/profile", options);
 
     if (!res.data.status) {
       return {

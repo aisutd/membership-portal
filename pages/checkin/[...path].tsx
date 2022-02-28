@@ -1,14 +1,27 @@
 import type { NextPage } from "next";
+import { useRecoilState } from "recoil";
+import { subject } from "recoil/state";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "styles/Home.module.css";
 import { useSession } from "next-auth/client";
 import EventCheckin from "components/EventCheckin";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import AccessDenied from "components/AccessDenied";
+
 
 const Profile: NextPage = () => {
   const [session, loading] = useSession();
+  const [sub, setSub] = useRecoilState(subject);
+
+  useEffect(() => {
+    if (session) {
+      setSub({
+        email: session.user?.email as string,
+        next_id: session.sub as string,
+      });
+    }
+  }, [session, setSub]);
 
   if (!session) {
     return (
