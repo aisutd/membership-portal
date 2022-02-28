@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import 'tailwindcss/tailwind.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBriefcase, faCalendar, faHandPaper, faHome, faNewspaper, faUser } from '@fortawesome/free-solid-svg-icons'
-import { useSession } from "next-auth/client";
+import { faBriefcase, faCalendar, faHandPaper, faHome, faNewspaper, faUser, faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { signOut, useSession } from "next-auth/client";
 import { slide as Menu } from 'react-burger-menu'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,12 +26,12 @@ const Sidebar = () => {
                 </div>
                 <nav className="flex-grow items-center  space-y-4 px-4">
                     <Link href="/" passHref>
-                        <a href="/" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                        <a className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
                             <div className="flex flex-row">
                                 <p className="w-1/4">
                                     <FontAwesomeIcon className="w-6 h-6" icon={faHome} />
                                 </p>
-                                <p className="hidden md:block w-3/4 text-left  mt-1 text-md">Home</p>
+                                <p className="hidden md:block w-3/4 text-left text-md">Home</p>
                             </div>
                         </a>
                     </Link>
@@ -60,12 +60,22 @@ const Sidebar = () => {
                     </div>
                 </a> */}
                     <Link href="/checkin" passHref>
-                        <a href="/checkin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                        <a className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
                             <div className="flex flex-row">
                                 <p className="w-1/4">
                                     <FontAwesomeIcon className="w-6 h-6" icon={faHandPaper} />
                                 </p>
-                                <p className="hidden md:block w-3/4 text-left  mt-1 text-md">Attendance</p>
+                                <p className="hidden md:block w-3/4 text-left  text-md">Attendance</p>
+                            </div>
+                        </a>
+                    </Link>
+                    <Link href="/" passHref>
+                        <a onClick={() => signOut()} className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                            <div className="flex flex-row">
+                                <p className="w-1/4">
+                                    <FontAwesomeIcon className="w-6 h-6" icon={faWindowClose} />
+                                </p>
+                                <p className="hidden md:block w-3/4 text-left   text-md">Sign Out</p>
                             </div>
                         </a>
                     </Link>
@@ -120,7 +130,7 @@ const Sidebar = () => {
                                 <p className="w-1/4">
                                     <FontAwesomeIcon className="w-6 h-6" icon={faHome} />
                                 </p>
-                                <p className=" md:block w-3/4 text-left  mt-1 text-md">Home</p>
+                                <p className=" md:block w-3/4 text-left  text-md">Home</p>
                             </div>
                         </a>
                     </Link>
@@ -131,6 +141,16 @@ const Sidebar = () => {
                                     <FontAwesomeIcon className="w-6 h-6" icon={faHandPaper} />
                                 </p>
                                 <p className=" md:block w-3/4 text-left text-md">Attendance</p>
+                            </div>
+                        </a>
+                    </Link>
+                    <Link href="/" passHref>
+                        <a onClick={() => signOut()} className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 text-white">
+                            <div className="flex flex-row">
+                                <p className="w-1/4">
+                                    <FontAwesomeIcon className="w-6 h-6 mt-0.5" icon={faWindowClose} />
+                                </p>
+                                <p className=" md:block w-3/4 text-left text-md">Sign Out</p>
                             </div>
                         </a>
                     </Link>
