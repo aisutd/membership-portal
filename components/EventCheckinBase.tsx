@@ -55,7 +55,7 @@ const EventCheckinBase = () => {
       </div> */}
       {success ? (
         <>
-          <div className="px-6 font-bold text-md ">CHECKED IN &#9989;</div>
+          <div className="px-6 font-bold text-md ">Checked In To: <br /> {eventName} &#9989;</div>
         </>
       ) : (
         <>

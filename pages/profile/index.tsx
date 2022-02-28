@@ -13,6 +13,7 @@ import { Suspense } from "react";
 import AccessDenied from "components/AccessDenied";
 
 const Profile: NextPage = () => {
+  return (<div></div>);
   const [session, loading] = useSession();
   const [sub, setSub] = useRecoilState(subject);
 
