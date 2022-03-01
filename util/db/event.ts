@@ -25,7 +25,8 @@ const fetchEvents = async (
 ): Promise<event[]> => {
   const docClient = new AWS.DynamoDB.DocumentClient();
   const table = "Events";
-  const pk = ym.toISOString().substring(0, 7); // YYYY-MM // partition key
+  const adjustedYm = new Date(ym.getTime() - 3600000 * ym.getTimezoneOffset());
+  const pk = adjustedYm.toISOString().substring(0, 7); // YYYY-MM // partition key
 
   const params = {
     TableName: table,
