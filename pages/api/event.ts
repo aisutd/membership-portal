@@ -42,8 +42,10 @@ export default async function handler(
     GET: async (req: NextApiRequest, res: NextApiResponse<DataGET>) => {
       try {
 
-        // Fetch all events that happened during the current month
-        const events = await fetchEvents(new Date(), true);
+        const currentDate = new Date();
+        const adjustedYm = new Date(currentDate.getTime() - 60000 * currentDate.getTimezoneOffset());
+        // fetch all events that are happening in the current month
+        const events = await fetchEvents(adjustedYm, true);
         const eventsWithAttendees: event[] = [];
 
         for (const oneEvent of events) {
@@ -84,17 +86,20 @@ export default async function handler(
      */
     PUT: async (req: NextApiRequest, res: NextApiResponse<DataPUT>) => {
       try {
+
+        const currentDate = new Date();
+        const adjustedYm = new Date(currentDate.getTime() - 60000 * currentDate.getTimezoneOffset());
         // fetch all events that are happening in the current month
-        const events = await fetchEvents(new Date());
+        const events = await fetchEvents(adjustedYm);
 
         for (const oneEvent of events) {
-
           // if the date for an event matches the current date & the check in code is correct
           if (
             oneEvent.url === req.body.code &&
-            new Date(oneEvent.date).toDateString() === new Date().toDateString()
+            new Date(oneEvent.date).toDateString() === adjustedYm.toDateString()
           ) {
 
+            console.log(req.body);
             // update the attendance information for the event
             const updatedEvent = await updateEventAttendance({
               cognito_id: req.body.cognito_id,
