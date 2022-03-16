@@ -91,14 +91,13 @@ export default async function handler(
         const adjustedYm = new Date(currentDate.getTime() - 60000 * currentDate.getTimezoneOffset());
         // fetch all events that are happening in the current month
         const events = await fetchEvents(adjustedYm);
-
+        
         for (const oneEvent of events) {
           // if the date for an event matches the current date & the check in code is correct
           if (
             oneEvent.url === req.body.code &&
-            new Date(oneEvent.date).toDateString() === adjustedYm.toDateString()
+            new Date(oneEvent.date).toDateString() === currentDate.toDateString()
           ) {
-
             console.log(req.body);
             // update the attendance information for the event
             const updatedEvent = await updateEventAttendance({
