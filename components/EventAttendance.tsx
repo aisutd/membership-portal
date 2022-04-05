@@ -61,13 +61,26 @@ const EventAttendance = () => {
         {events.map((event, index) => {
           return (
             <div key={index}>
-              <div className="px-6 font-bold text-md ">
+              <div className="px-6 font-bold text-lg pt-6">
                 Event Name: {event.Name}
               </div>
+              <div className="px-6 font-italic text-md">
+                Date: {new Date(event.date).toDateString()}
+              </div>
+              <div className="px-6 font-italic text-md pb-6">
+                Code: {event.url}
+              </div>
+
+              <div className="px-6 font-bold text-md">Attendee List</div>
+              {event.Attendees?.length === 0 ? (
+                <div className="px-6 text-md">No atteendees found</div>
+              ) : (
+                <div></div>
+              )}
               {(event.Attendees as profile[]).map((attendee, index) => {
                 return (
                   <div key={index} className="px-6 text-md ">
-                    {attendee.email ? attendee.email : attendee.user_id}
+                    {index + 1}. {attendee.email ? attendee.email : attendee.user_id}
                   </div>
                 );
               })}

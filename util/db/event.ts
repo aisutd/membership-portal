@@ -63,8 +63,6 @@ const fetchEvents = async (
       })
     }
 
-    console.log(events);
-
   } catch (err) {
     console.log(err);
   }
