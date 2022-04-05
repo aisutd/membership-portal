@@ -27,6 +27,8 @@ const fetchEvents = async (
   const table = "Events";
   const pk = ym.toISOString().substring(0, 7); // YYYY-MM // partition key
 
+  console.log(pk);
+
   const params = {
     TableName: table,
     KeyConditionExpression: "#pk = :partitionkey",
@@ -41,15 +43,28 @@ const fetchEvents = async (
 
   try {
     const result = await docClient.query(params).promise();
-    
-    result.Items?.forEach((item) => {
-      events.push({
-        date: new Date(item.YearMonth + "-" + item.DayTime + " CST"), // set correct timezone
-        Name: item.EventName,
-        url: item.url,
-        Attendees: getAttendees ? item.Attendees.values : [],
+
+    if (result.Items) {
+      result.Items.forEach((item) => {
+        events.push({
+          date: new Date(item.YearMonth + "-" + item.DayTime + " CST"), // set correct timezone
+          Name: item.EventName,
+          url: item.url,
+          Attendees: getAttendees ? item.Attendees?.values ?? [] : [], // if no attendees then nullish coalesce to empty array
+        });
       });
-    });
+    }
+    else {
+      events.push({
+        date: new Date(),
+        Name: "No Events Found",
+        url: "na",
+        Attendees: [],
+      })
+    }
+
+    console.log(events);
+
   } catch (err) {
     console.log(err);
   }
@@ -102,4 +117,25 @@ const updateEventAttendance = async (
   return null;
 };
 
-export { fetchEvents, updateEventAttendance };
+const createEvent = async (newEvent: event): Promise<void> => {
+  const docClient = new AWS.DynamoDB.DocumentClient();
+  const table = "Events";
+
+  const params = {
+    TableName: table,
+    Item: {
+      YearMonth: newEvent.date.toISOString().substring(0, 7), // partition key
+      DayTime: newEvent.date.toISOString().substring(8, 10), // sort key
+      EventName: newEvent.Name,
+      url: newEvent.url,
+    },
+  };
+
+  try {
+    const result = await docClient.put(params).promise();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export { fetchEvents, updateEventAttendance, createEvent };

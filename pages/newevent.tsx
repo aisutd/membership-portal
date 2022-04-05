@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "styles/Home.module.css";
 import { useSession } from "next-auth/client";
-import EventAttendance from "components/EventAttendance";
+import EventCreation from "components/EventCreation";
 import { Suspense, useEffect } from "react";
 import { subject } from "recoil/state";
 import { useRecoilState } from "recoil";
@@ -37,17 +37,17 @@ const Profile: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Event Attendees</title>
+        <title>Event Creation</title>
         <meta name="description" content="Join AIS Today!" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </Head>
       <main className="fixed flex w-full h-full">
         <Sidebar></Sidebar>
         <div className="flex flex-col w-full h-full">
-          <h1 className="text-left text-3xl font-bold pl-16 pt-12">Event Attendees</h1>
+          <h1 className="text-left text-3xl font-bold pl-16 pt-12">Event Creation</h1>
           <div className="w-full pl-10 pt-5 pr-4">
             <Suspense fallback={<span>Loading...</span>}>
-              <EventAttendance />
+              <EventCreation />
             </Suspense>
           </div>
         </div>
