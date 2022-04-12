@@ -127,12 +127,14 @@ const createEvent = async (newEvent: event): Promise<void> => {
       EventName: newEvent.Name,
       url: newEvent.url,
     },
+    ConditionExpression: 'attribute_not_exists(YearMonth) AND attribute_not_exists(DayTime)'
   };
 
   try {
     const result = await docClient.put(params).promise();
   } catch (err) {
     console.log(err);
+    throw err;
   }
 };
 
