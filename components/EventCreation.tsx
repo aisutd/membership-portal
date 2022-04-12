@@ -29,7 +29,9 @@ const EventCreation = () => {
     }
   }, [session, setSub]);
 
-  const submit = async () => {
+  const submit = async (e: any) => {
+    e.preventDefault();
+
     if (!user) {
       return;
     }
@@ -81,14 +83,16 @@ const EventCreation = () => {
           <div className="px-6 font-bold text-md ">Success &#9989;</div>
         </>
       ) : (
-        <>
+        <form onSubmit={submit}>
           <div className="px-6 pt-2 pb-2 flex flex-wrap gap-x-8 gap-y-4 items-center">
             <div className="mb-3 pt-0">
               <input
                 type="text"
                 placeholder="Event Name"
                 className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-gray-200 rounded text-sm border-0 shadow-lg outline-none focus:outline-none focus:ring w-80"
+                required
                 onChange={(e) => {
+                  e.preventDefault();
                   setEventName(e.target.value);
                 }}
               />
@@ -97,10 +101,13 @@ const EventCreation = () => {
           <div className="px-6 pt-2 pb-2 flex flex-wrap gap-x-8 gap-y-4 items-center">
             <div className="mb-3 pt-0">
               <input
-                type="text"
-                placeholder="Event Date Format: YYYY-MM-DD"
+                type="date"
+                placeholder="Event Date"
+                min="2022-01-01"
                 className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-gray-200 rounded text-sm border-0 shadow-lg outline-none focus:outline-none focus:ring w-80"
+                required
                 onChange={(e) => {
+                  e.preventDefault();
                   setEventDate(e.target.value);
                 }}
               />
@@ -111,8 +118,10 @@ const EventCreation = () => {
               <input
                 type="text"
                 placeholder="Code"
+                required
                 className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-gray-200 rounded text-sm border-0 shadow-lg outline-none focus:outline-none focus:ring w-80"
                 onChange={(e) => {
+                  e.preventDefault();
                   setEventCode(e.target.value);
                 }}
               />
@@ -121,13 +130,12 @@ const EventCreation = () => {
           <div className="px-6 pt-2 pb-2 flex flex-wrap gap-x-8 gap-y-4 items-center">
             <button
               className=" rounded-full text-white bg-blue-500 font-bold uppercase px-3 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-36 h-12"
-              type="button"
-              onClick={submit}
+              type="submit"
             >
               Create Event
             </button>
           </div>
-        </>
+        </form>
       )}
       {/* <div className="px-6 pt-2 pb-2 flex flex-row">
         <div className="mb-3 pt-0">
