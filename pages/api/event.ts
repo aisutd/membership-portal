@@ -5,6 +5,7 @@ import {
   event,
   fetchEvents,
   updateEventAttendance,
+  createEvent,
 } from "util/db/event";
 import { profile, profile_update_schema, fetchProfile, updateProfileSet } from "util/db/profile";
 
@@ -135,6 +136,32 @@ export default async function handler(
         });
       }
     },
+    /**
+     * Called to create a new event
+     * @param req NextApiRequest
+     * @param res NextApiResponse
+     * @returns success message else failure
+     */
+    POST: async (req: NextApiRequest, res: NextApiResponse) => {
+      try {
+        await createEvent({
+          Name: req.body.event.EventName,
+          date: new Date(req.body.event.date),
+          url: req.body.event.url,
+        });
+
+        res.json({
+          status: true,
+          message: "success",
+        })
+      } catch (err) {
+        console.log(err);
+        res.json({
+          status: false,
+          message: "failed to create new event",
+        });
+      }
+    }
   };
 
   const response = handleCase[method];
